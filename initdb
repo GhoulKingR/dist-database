@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+db_folder="databases"
+if [[ -d "$db_folder" ]]; then
+    if [[ $(ls -A "$db_folder") ]]; then
+        echo "$db_folder folder exists, clearing files"
+        rm -rf $db_folder
+        mkdir $db_folder
+    else
+        echo "$db_folder folder already exists"
+    fi
+else
+    echo "Making $db_folder directory"
+    mkdir "$db_folder"
+fi
+
+
+if command -v python3 >/dev/null 2>&1; then
+    echo "Python3 installed"
+    alias python=python3
+elif command -v python >/dev/null 2>&1; then
+    echo "Python installed"
+
+else
+    echo "No Python installation found"
+    exit 1
+fi
+
+cd db_creation_scripts
+python main.py
