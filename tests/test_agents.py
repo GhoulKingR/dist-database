@@ -9,4 +9,4 @@ def test_wrong_call_fails(client):
 
 def test_right_is_successful(client):
     response = client.get("/api/agents/A002")
-    assert response.status_code == 200
+    assert response.json["code"] == "A002"
