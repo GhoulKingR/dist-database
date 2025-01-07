@@ -1,5 +1,6 @@
 from flask import Flask, request
 import sqlite3
+import sys
 
 app = Flask(__name__)
 
@@ -216,7 +217,12 @@ def create_app():
 
 if __name__ == "__main__":
     try:
-        app.run(port=8081, debug=True)
+        try:
+            port = int(sys.argv[1])
+        except KeyError:
+            port = 8081
+
+        app.run(port=port, debug=True)
     
     except KeyboardInterrupt:
         print("Exitting gracefully")
