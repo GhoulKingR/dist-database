@@ -1,4 +1,38 @@
 from agents import id_to_code, count_agents
+from agents import create_app
+import pytest
+import sqlite3
+
+@pytest.fixture
+def app():
+    app = create_app()
+    app.config.update({
+        "TESTING": True
+    })
+
+    yield app
+
+@pytest.fixture
+def agentdb():
+    try:
+        conn = sqlite3.connect("databases/grp9agents.db")
+        yield conn
+
+    except sqlite3.Error as err:
+        print("An SQL error occured:", err)
+        return {}, 500  # internal server error
+    
+    finally:
+        if conn:
+            conn.close()
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
+
+@pytest.fixture
+def runner(app):
+    return app.test_cli_runner()
 
 def test_get_all(client, agentdb):
     response = client.get("/api/agents")
@@ -37,11 +71,11 @@ def test_can_delete(client):
     resp = client.get("/api/agents/A002")
     assert resp.status_code == 404
 
-def test_can_delete(client):
-    delete_resp = client.put("/api/agents/A003", json={
+def test_can_update(client):
+    update_resp = client.put("/api/agents/A003", json={
         "name": "Chigozie",
     })
-    assert delete_resp.status_code == 200
+    assert update_resp.status_code == 200
     resp = client.get("/api/agents/A003")
     assert resp.json["name"] == "Chigozie"
 
