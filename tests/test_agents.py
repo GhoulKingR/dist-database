@@ -22,6 +22,15 @@ def test_can_create_agent(client):
     })
     assert response.status_code == 200
 
+def test_missing_args_fail(client):
+    response = client.post("/api/agents", json={
+        "name": "Chigozie Oduah",
+        "working_area": "Tenesse",
+        "commission": "0.50",
+        "phone_no": "077-02346674",
+    })
+    assert response.status_code == 400
+
 def test_new_id():
     assert id_to_code(3) == "A003"
 

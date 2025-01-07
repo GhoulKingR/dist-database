@@ -113,8 +113,8 @@ def create_agent():
         print("An SQL error occured:", err)
         return {}, 500  # internal server error
 
-    except AttributeError as err:
-        print("Attribute error: err")
+    except KeyError as err:
+        print("Key error: err")
         return {}, 400  # Bad request
     
     finally:
