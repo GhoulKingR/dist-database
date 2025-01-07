@@ -4,10 +4,10 @@ import sys
 
 app = Flask(__name__)
 
-# C [ ]
+# C [x]
 # R [x]
-# U [ ]
-# D [ ]
+# U [x]
+# D [x]
 
 # Get all customers
 @app.get("/api/customers")
@@ -256,7 +256,7 @@ if __name__ == "__main__":
         try:
             port = int(sys.argv[1])
         except KeyError:
-            port = 8081
+            port = 8080
 
         app.run(port=port, debug=True)
     
