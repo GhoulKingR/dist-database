@@ -37,6 +37,14 @@ def test_can_delete(client):
     resp = client.get("/api/agents/A002")
     assert resp.status_code == 404
 
+def test_can_delete(client):
+    delete_resp = client.put("/api/agents/A003", json={
+        "name": "Chigozie",
+    })
+    assert delete_resp.status_code == 200
+    resp = client.get("/api/agents/A003")
+    assert resp.json["name"] == "Chigozie"
+
 def test_new_id():
     assert id_to_code(3) == "A003"
 

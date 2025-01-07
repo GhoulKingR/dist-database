@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # C [x]
 # R [x]
-# U
+# U [x]
 # D [x]
 
 # Get all agents
@@ -160,6 +160,56 @@ def del_agent(code):
             print("Sqlite3 connection closed")
 
 # Route to update a document
+@app.put("/api/agents/<code>")
+def update_agent(code):
+    try:
+        conn = sqlite3.connect("databases/grp9agents.db")
+        
+        # Get item to be update
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM GRP9AGENTS WHERE agent_code = ?", (code,))
+        row = cursor.fetchone()
+
+        json_data = request.get_json()
+        if json_data:
+            new_version = {}
+
+            if row == None:
+                print(f'Agent with code "{code}" doesn\'t exist')
+
+                return new_version, 404  # not found
+            else:
+                new_version["code"] = row[0]
+                new_version["name"] = row[1]
+                new_version["working_area"] = row[2]
+                new_version["commission"] = row[3]
+                new_version["phone_no"] = row[4]
+                new_version["country"] = row[5]
+
+                for key in json_data.keys():
+                    new_version[key] = json_data[key]
+
+                    if key not in ['name', 'working_area', 'commission', 'phone_no', 'country']:
+                        return {}, 400      # Bad request
+                    
+                    sql_key = 'agent_name' if key == 'name' else key
+                    
+                    conn.execute(f"UPDATE GRP9AGENTS set {sql_key} = ? WHERE agent_code = ?", (json_data[key], code))
+
+                conn.commit()
+                return new_version
+            
+        else:
+            return json_data, 400   # Bad request
+    
+    except sqlite3.Error as err:
+        print("An SQL error occured:", err)
+        return {}, 500  # Internal server error
+    
+    finally:
+        if conn:
+            conn.close()
+            print("Sqlite3 connection closed")
 
 def create_app():
     return app
