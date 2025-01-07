@@ -14,7 +14,7 @@ Before running the servers in this project you need to have the following instal
 
 Run this command to instsall the project's dependencies:
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## How to run
