@@ -1,23 +1,36 @@
 # Distributed database project
+This is a group project on building a distributed database server. Currently the project's architecture is as follows:
+- Three servers that each host a table of a database
+- A central server where the client application will be
+
+So far, I've only implemented two of the three servers, I'm working on the third one, at the moment.
+
+The three servers in the project serve as REST APIs for the order, agents, and customer databases, allowing the central server to interact with with the databases.
 
 ## Setting up
-To run this project you need to have the following installed:
+Before running the servers in this project you need to have the following installed on your system:
 - Python 3
 - virtual environment (optional but Recommended)
 
-Run this command to instsall this project's dependencies:
+Run this command to instsall the project's dependencies:
 ```bash
 $ pip install -r requirements.txt
 ```
 
 ## How to run
-In this project I plan to have four major python servers. Three for each databases and a central server. Currently there's only one server implemented, the agents server. To run this server, use any of these commands:
+To run the two already implemented servers, use any of these commands:
+* Agents
 ```bash
 python3 agent.py 8080   # to run the server on port 8080
 python3 agent.py        # defaults to 8081
 ```
+* Customers
+```bash
+python3 customer.py 8080   # to run the server on port 8080
+python3 customer.py        # defaults to 8080
+```
 
-# Tests
+## Tests
 All test files are located in the `test` folder to keep test files away from the server code.
 
 This project uses pytest for testing. So you need to use this command to run all the tests:
@@ -25,7 +38,7 @@ This project uses pytest for testing. So you need to use this command to run all
 PYTHONPATH=. pytest
 ```
 
-I also included an `initdb` file to make resetting the database files easier. To reset the database files, make `initdb` executable, and then run it in the terminal:
+I included an `initdb` file to make resetting the database files easier. To reset the database files, make `initdb` executable, and then run it in the terminal:
 ```bash
 chmod +x initdb
 ./initdb
