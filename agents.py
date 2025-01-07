@@ -6,7 +6,7 @@ app = Flask(__name__)
 # C [x]
 # R [x]
 # U
-# D
+# D [x]
 
 # Get all agents
 @app.get("/api/agents")
@@ -59,7 +59,6 @@ def agent(code):
             result["commission"] = row[3]
             result["phone_no"] = row[4]
             result["country"] = row[5]
-
             return result
     
     except sqlite3.Error as err:
@@ -123,6 +122,43 @@ def create_agent():
             print("Sqlite3 connection closed")
 
 # Route to delete a document
+@app.delete("/api/agents/<code>")
+def del_agent(code):
+    try:
+        conn = sqlite3.connect("databases/grp9agents.db")
+        
+        # Get item to be deleted
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM GRP9AGENTS WHERE agent_code = ?", (code,))
+        row = cursor.fetchone()
+
+        result = {}
+        if row == None:
+            print(f'Agent with code "{code}" doesn\'t exist')
+
+            return result, 404  # not found
+        else:
+            result["code"] = row[0]
+            result["name"] = row[1]
+            result["working_area"] = row[2]
+            result["commission"] = row[3]
+            result["phone_no"] = row[4]
+            result["country"] = row[5]
+
+            conn.execute("DELETE FROM GRP9AGENTS WHERE agent_code = ?", (code,))
+            conn.commit()
+
+            return result
+    
+    except sqlite3.Error as err:
+        print("An SQL error occured:", err)
+        return {}, 500  # Internal server error
+    
+    finally:
+        if conn:
+            conn.close()
+            print("Sqlite3 connection closed")
+
 # Route to update a document
 
 def create_app():
