@@ -14,7 +14,6 @@ else
     mkdir "$db_folder"
 fi
 
-
 if command -v python3 >/dev/null 2>&1; then
     echo "Python3 installed"
     alias python=python3
