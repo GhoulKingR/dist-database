@@ -33,8 +33,9 @@ python3 orders.py 8080   # to run the server on port 8080, or
 python3 orders.py        # defaults to 8080
 ```
 
+<!--
 ## Sending requests
-<!-- How to send requsts to the posts -->
+How to send requsts to the posts -->
 
 ## Testing
 All test files are located in the `test` folder to keep test files away from the server code.
