@@ -1,8 +1,10 @@
 from flask import Flask, request
+from flask_cors import CORS
 import sqlite3
 import sys
 
 app = Flask(__name__)
+CORS(app)
 
 # C []
 # R []
@@ -227,7 +229,7 @@ if __name__ == "__main__":
     try:
         try:
             port = int(sys.argv[1])
-        except KeyError:
+        except IndexError:
             port = 8080
 
         app.run(port=port, debug=True)

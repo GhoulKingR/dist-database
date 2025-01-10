@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Customer details:</h1>
+        <ul>
+            <li><b>Name: </b><span>{{ name }}</span></li>
+            <li><b>Code: </b><span>{{ code }}</span></li>
+            <li><b>Phone number: </b><span>{{ phone_no }}</span></li>
+            <li><b>Working area: </b><span>{{ working_area }}</span></li>
+            <li><b>Opening amount: </b><span>{{ opening_amt }}</span></li>
+            <li><b>Outstanding amount: </b><span>{{ outstanding_amt }}</span></li>
+            <li><b>Received amount: </b><span>{{ receive_amt }}</span></li>
+            <li><b>Agent code: </b><a href="/agent/{{ agent_code }}">{{ agent_code }}</a></li>
+            <li><b>City: </b><span>{{ city }}</span></li>
+            <li><b>Grade: </b><span>{{ grade }}</span></li>
+        </ul>
+    </body>
+</html>
