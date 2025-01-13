@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+./initdb
+PYTHONPATH=. python3 -m pytest

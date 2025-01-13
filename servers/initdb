@@ -16,14 +16,17 @@ fi
 
 if command -v python3 >/dev/null 2>&1; then
     echo "Python3 installed"
-    alias python=python3
+
+    cd db_creation_scripts
+    python3 main.py
 elif command -v python >/dev/null 2>&1; then
     echo "Python installed"
 
+    cd db_creation_scripts
+    python main.py
 else
     echo "No Python installation found"
     exit 1
 fi
 
-cd db_creation_scripts
-python main.py
+
