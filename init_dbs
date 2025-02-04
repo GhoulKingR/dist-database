@@ -1,12 +1,14 @@
+#!/usr/bin/env python3
+
 import sqlite3
 
 def initdb(dbfile, filename):
     connection = None
     try:
-        connection = sqlite3.connect("../databases/" + dbfile)
+        connection = sqlite3.connect(dbfile)
         print("Database init")
 
-        db_file = open(filename, "r")
+        db_file = open("databases/" + filename, "r")
         db_cmds = db_file.read().strip().split(";")
 
         for cmd in db_cmds:
@@ -25,6 +27,6 @@ def initdb(dbfile, filename):
             connection.close()
             print("Sqlite3 connection closed")
 
-initdb("grp9agents.db", "agents.sql")
-initdb("grp9customer.db", "customer.sql")
-initdb("grp9order.db", "orders.sql")
+initdb("agent-server/grp9agents.db", "agents.sql")
+initdb("customer-server/grp9customer.db", "customer.sql")
+initdb("order-server/grp9order.db", "orders.sql")
