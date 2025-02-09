@@ -1,11 +1,12 @@
 (() => {
-    const orderServerServer = "http://127.0.0.1:8080/api/orders";
-    const agentServerPort = "http://127.0.0.1:8081";
+    const orderServer = "http://127.0.0.1:8080";
+    const url = `${orderServer}/api/orders`;
+    // const agentServerPort = "http://127.0.0.1:8081";
 
     const table = document.querySelector("table");
 
     // fetch all orders
-    fetch(orderServerServer)
+    fetch(url)
         .then(res => res.json())
         .then(res => {
             for (let order of res) {

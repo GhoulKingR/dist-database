@@ -162,6 +162,6 @@ app.put("/api/orders/:num", function(req, res) {
 });
 
 const port = 8080;
-app.listen(port, function() {
+app.listen(port, '0.0.0.0', function() {
     console.log(`Listening on port ${port}`);
 });

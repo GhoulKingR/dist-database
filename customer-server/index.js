@@ -194,6 +194,6 @@ app.put("/api/customers/:code", function(req, res) {
 });
 
 const port = 8082;
-app.listen(port, function() {
+app.listen(port, '0.0.0.0', function() {
     console.log(`Listening on port ${port}`);
 });
