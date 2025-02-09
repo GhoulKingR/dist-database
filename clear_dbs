@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+rm agent-server/grp9agents.db
+rm customer-server/grp9customer.db
+rm order-server/grp9order.db
