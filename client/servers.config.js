@@ -1,5 +1,5 @@
 module.exports = {
-	customerServer: '127.0.0.1:8082',
-	agentServer: '127.0.0.1:8081',
-	orderServer: '127.0.0.1:8080',
+	customerServer: 'http://127.0.0.1:8082',
+	agentServer: 'http://127.0.0.1:8081',
+	orderServer: 'http://127.0.0.1:8080',
 }
